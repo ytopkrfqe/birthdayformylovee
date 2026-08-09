@@ -1,0 +1,623 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #0a0a1a;
+}
+
+#app {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===== КОСМИЧЕСКИЙ ФОН ===== */
+#space-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: radial-gradient(ellipse at center, #0a0a2e 0%, #000000 100%);
+}
+
+#stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 160px 30px, #fff, transparent),
+        radial-gradient(1px 1px at 200px 60px, #fff, transparent),
+        radial-gradient(1px 1px at 300px 20px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 400px 80px, #fff, transparent),
+        radial-gradient(1px 1px at 500px 40px, #fff, transparent),
+        radial-gradient(2px 2px at 600px 90px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 700px 30px, #fff, transparent),
+        radial-gradient(1px 1px at 800px 70px, #fff, transparent),
+        radial-gradient(2px 2px at 900px 50px, rgba(255,255,255,0.6), transparent);
+    background-size: 200px 200px;
+    animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+#nebula {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(138, 43, 226, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(255, 20, 147, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(0, 191, 255, 0.08) 0%, transparent 50%);
+    animation: nebulaFloat 20s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaFloat {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* ===== СТЕКЛЯННЫЙ ЭФФЕКТ ===== */
+.glass {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ===== КОТИК ===== */
+#cat-container {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 100;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#cat {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    pointer-events: auto;
+    cursor: pointer;
+    animation: catIdle 2s ease-in-out infinite;
+}
+
+@keyframes catIdle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+.cat-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Голова */
+.cat-head {
+    position: relative;
+    width: 50px;
+    height: 45px;
+    background: linear-gradient(135deg, #f5a623, #e8921a);
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+}
+
+/* Уши */
+.cat-ear {
+    position: absolute;
+    top: -12px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 18px solid #f5a623;
+}
+
+.cat-ear.left {
+    left: 2px;
+    transform: rotate(-10deg);
+}
+
+.cat-ear.right {
+    right: 2px;
+    transform: rotate(10deg);
+}
+
+.cat-ear::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: -6px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 12px solid #ffb6c1;
+}
+
+/* Мордочка */
+.cat-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 8px;
+}
+
+.cat-eye {
+    width: 8px;
+    height: 10px;
+    background: #2c1810;
+    border-radius: 50%;
+    margin: 0 3px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.cat-eye::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+}
+
+.cat-eye.left-eye {
+    transform: translateX(-5px);
+}
+
+.cat-eye.right-eye {
+    transform: translateX(5px);
+}
+
+.cat-nose {
+    width: 6px;
+    height: 5px;
+    background: #ff6b8a;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cat-mouth {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 6px;
+    border-bottom: 2px solid #2c1810;
+    border-radius: 0 0 50% 50%;
+}
+
+/* Хвост */
+.cat-tail {
+    position: absolute;
+    bottom: 5px;
+    right: -25px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f5a623, #e8921a);
+    animation: tailWag 1s ease-in-out infinite;
+}
+
+@keyframes tailWag {
+    0%, 100% { transform: rotate(-20deg) scale(0.8); }
+    50% { transform: rotate(20deg) scale(1.2); }
+}
+
+/* Лапки */
+.cat-paws {
+    position: absolute;
+    bottom: -8px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px;
+}
+
+.paw {
+    width: 14px;
+    height: 10px;
+    background: linear-gradient(135deg, #f5a623, #e8921a);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.paw.left-front {
+    transform: rotate(-15deg);
+}
+
+.paw.right-front {
+    transform: rotate(15deg);
+}
+
+/* Движение котика */
+#cat-container.moving {
+    animation: catRun 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes catRun {
+    0% { transform: translateX(0) scaleX(1); }
+    100% { transform: translateX(10px) scaleX(1); }
+}
+
+#cat-container.flip {
+    transform: scaleX(-1);
+}
+
+/* Реакция на клик */
+#cat-container.happy {
+    animation: catHappy 0.5s ease;
+}
+
+@keyframes catHappy {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(-10deg); }
+    75% { transform: scale(1.2) rotate(10deg); }
+}
+
+/* ===== КОНТЕНТ ===== */
+#content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.container {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px 20px;
+    border-radius: 24px;
+    min-height: 450px;
+    color: white;
+    position: relative;
+}
+
+/* Экраны */
+.screen {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Текст */
+.title {
+    font-size: 28px;
+    text-align: center;
+    margin: 15px 0 10px;
+    background: linear-gradient(135deg, #ff6b9d, #c084fc, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(192, 132, 252, 0.3);
+}
+
+.title span {
+    font-size: 32px;
+}
+
+.subtitle {
+    text-align: center;
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Счётчик */
+.counter {
+    background: rgba(255,255,255,0.1) !important;
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.counter-label {
+    display: block;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.counter-number {
+    display: block;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 5px 0;
+    background: linear-gradient(135deg, #ff6b9d, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Кнопки */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.main-btn {
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+    color: white;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 16px 12px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+}
+
+.main-btn:active {
+    transform: scale(0.95);
+    background: rgba(255,255,255,0.25);
+}
+
+.main-btn:nth-child(3) {
+    background: linear-gradient(135deg, rgba(255,107,157,0.3), rgba(192,132,252,0.3));
+}
+
+.main-btn:nth-child(4) {
+    background: linear-gradient(135deg, rgba(96,165,250,0.3), rgba(192,132,252,0.3));
+}
+
+/* Назад */
+.back-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+.back-btn:active {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Галерея */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.gallery-item {
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+    min-height: 100px;
+}
+
+.gallery-item:active {
+    transform: scale(0.95);
+    background: rgba(255,255,255,0.2);
+}
+
+/* Причины */
+.reasons-list {
+    margin-top: 15px;
+}
+
+.reason-item {
+    background: rgba(255,255,255,0.08);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.reason-item .number {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Сюрприз */
+.surprise-container {
+    text-align: center;
+}
+
+.big-heart {
+    font-size: 80px;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.surprise-title {
+    font-size: 26px;
+    margin: 15px 0;
+    background: linear-gradient(135deg, #ff6b9d, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.surprise-text {
+    font-size: 18px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.fireworks {
+    font-size: 40px;
+    letter-spacing: 10px;
+    margin-top: 15px;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Музыка */
+.music-player {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.music-emoji {
+    font-size: 60px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.music-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.play-btn {
+    background: linear-gradient(135deg, rgba(96,165,250,0.3), rgba(192,132,252,0.3));
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+.music-lyrics {
+    margin-top: 20px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-text {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+/* ===== АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ ===== */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px;
+        min-height: 400px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .buttons-grid {
+        gap: 10px;
+    }
+    
+    .main-btn {
+        font-size: 14px;
+        padding: 14px 10px;
+    }
+
+    #cat-container {
+        bottom: 15px;
+        left: 15px;
+        transform: scale(0.8);
+    }
+}

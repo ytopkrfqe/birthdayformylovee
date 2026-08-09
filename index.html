@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>С Днём Рождения! 💖</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- КОСМИЧЕСКИЙ ФОН -->
+        <div id="space-bg">
+            <div id="stars"></div>
+            <div id="nebula"></div>
+        </div>
+
+        <!-- ===== КОТИК ===== -->
+        <div id="cat-container">
+            <div id="cat">
+                <div class="cat-body">
+                    <div class="cat-head">
+                        <div class="cat-ear left"></div>
+                        <div class="cat-ear right"></div>
+                        <div class="cat-face">
+                            <div class="cat-eye left-eye"></div>
+                            <div class="cat-eye right-eye"></div>
+                            <div class="cat-nose"></div>
+                            <div class="cat-mouth"></div>
+                        </div>
+                    </div>
+                    <div class="cat-tail"></div>
+                </div>
+                <div class="cat-paws">
+                    <div class="paw left-front"></div>
+                    <div class="paw right-front"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+        <div id="content">
+            <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+            <div id="main-screen" class="screen active">
+                <div class="container glass">
+                    <div class="heart-emoji">💖</div>
+                    <h1 class="title">С Днём Рождения, <br><span id="girlName">Моя Любимая!</span> 🎉</h1>
+                    <p class="subtitle">Сегодня твой день, и я хочу сделать его особенным ✨</p>
+                    
+                    <!-- СЧЁТЧИК ДНЕЙ -->
+                    <div class="counter glass">
+                        <span class="counter-label">Мы вместе уже</span>
+                        <span class="counter-number" id="daysCount">0</span>
+                        <span class="counter-label">дней ❤️</span>
+                        <!-- ДЕТАЛЬНЫЙ ПОДСЧЁТ (годы, месяцы, дни) -->
+                        <div style="font-size: 14px; margin-top: 8px; opacity: 0.9;" id="detailedDate">
+                            Это 1 год, 2 месяца и 3 дня
+                        </div>
+                    </div>
+
+                    <!-- КНОПКИ -->
+                    <div class="buttons-grid">
+                        <button class="main-btn" onclick="openGallery()">
+                            📸 Наши фото
+                        </button>
+                        <button class="main-btn" onclick="showReasons()">
+                            ❤️ За что я тебя люблю
+                        </button>
+                        <button class="main-btn" onclick="showSurprise()">
+                            🎁 Сюрприз
+                        </button>
+                        <button class="main-btn" onclick="playMusic()">
+                            🎵 Наша песня
+                        </button>
+                    </div>
+
+                    <!-- ТРОГАТЕЛЬНАЯ ПОДПИСЬ -->
+                    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:13px;margin-top:10px;">
+                        🌹 С 6 сентября 2023 года <br>
+                        каждый день с тобой — как первый ❤️
+                    </p>
+
+                    <p class="footer-text">Нажми на кнопку, и котик побежит 🐱</p>
+                </div>
+            </div>
+
+            <!-- ===== ГАЛЕРЕЯ ===== -->
+            <div id="gallery-screen" class="screen">
+                <div class="container glass">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <h2>📸 Наши моменты</h2>
+                    <div class="gallery-grid" id="galleryGrid"></div>
+                </div>
+            </div>
+
+            <!-- ===== ПРИЧИНЫ ===== -->
+            <div id="reasons-screen" class="screen">
+                <div class="container glass">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <h2>❤️ Почему я тебя люблю</h2>
+                    <div id="reasonsList" class="reasons-list"></div>
+                </div>
+            </div>
+
+            <!-- ===== СЮРПРИЗ ===== -->
+            <div id="surprise-screen" class="screen">
+                <div class="container glass surprise-container">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <div id="surpriseContent">
+                        <div class="big-heart">💖</div>
+                        <h2 class="surprise-title">Ты — моё счастье!</h2>
+                        <p class="surprise-text" id="surpriseMessage"></p>
+                        <div class="fireworks" id="fireworks">🎉 ✨ 🎊 🌟</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== МУЗЫКА ===== -->
+            <div id="music-screen" class="screen">
+                <div class="container glass">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <h2>🎵 Наша песня</h2>
+                    <div class="music-player">
+                        <div class="music-emoji">🎶</div>
+                        <p class="music-title">Твоя любимая песня</p>
+                        <button class="play-btn" onclick="toggleMusic()">▶️ Включить</button>
+                        <p class="music-lyrics" id="lyricsDisplay">
+                            Ты — самое лучшее, что случилось в моей жизни ❤️
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
